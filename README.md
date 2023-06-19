@@ -1,2 +1,2 @@
 # TEST
-module test and tutorial
+this package is for memorization. ^_^
