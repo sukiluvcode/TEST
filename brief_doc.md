@@ -14,4 +14,3 @@ _Sisyphus Extractor_ is a tool to extract well formated data out from chemisty/m
 example image
 ![image](./images/build_model.png)
 <img src="images/build_model.png" width="200" height="200" />
-![alt text](images/fetch_interface.png)
