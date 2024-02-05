@@ -1,10 +1,16 @@
 # Utilities illustration 🔧
-_Sisyphus Extractor_ is a tool to extract well formated data out from chemisty/material articles by exploiting the power of large language model.
+_Sisyphus Extractor_ is a tool to extract well formated data out from chemisty/material articles by exploiting the power of large language model.  
+![icon](./images/sisyphus_icon.png)
 
 ## Table of contents
 [How to use](#💻-how-to-use)  
 [The main utilities](#🙌-the-main-utilities)  
 - [Article retrieving](#article-retrieving)
+- [Extract](#extract)
+  - [Query define](#query-define)
+  - [Criteria define](#criteria-define)
+  - [Model define](#model-define)
+  - [extract](#extract-1)
 
 
 ## 💻 How to use
@@ -41,18 +47,19 @@ The extract process is quite straight forward.
 
 Case review. __nonlinear optical material key properties extraction.__  
 
-#### _query define_: just write a middle size sentence aroud 200 words.
-```Description of the properties of NLO materials, include the name of nlo material (e.g. KBBF, Na4B8O9F10), second harmonic generation SHG (e.g. 0.8 pm/V, 3 × KDP), band gaps Eg (e.g. 6.2 eV), birefringence, phase match, absorption edge, laser induced damage thersholds (LIDT). reports values unit such as (eV, pm/V, MW/cm2, nm), and the SHG value is sometimes given in multiples of KDP or AgGaS2```  
+#### _Query define_  
+just write a middle size sentence aroud 200 words.
+> Description of the properties of NLO materials, include the name of nlo material (e.g. KBBF, Na4B8O9F10), second harmonic generation SHG (e.g. 0.8 pm/V, 3 × KDP), band gaps Eg (e.g. 6.2 eV), birefringence, phase match, absorption edge, laser induced damage thersholds (LIDT). reports values unit such as (eV, pm/V, MW/cm2, nm), and the SHG value is sometimes given in multiples of KDP or AgGaS2
 
 > Note: You are supposed to include all the properties that will be extracted in later steps.
 
-#### _criteria_: this helps llms to judge whether the setence has target information or not.
-- Given a text quoted by triple backticks, judge whether the text contains the desired information. Return a JSON object with the following criteria:
 
+#### _Criteria define_  
+this helps llms to judge whether the setence has target information or not.
+> Given a text quoted by triple backticks, judge whether the text contains the desired information. Return a JSON object with the following criteria:
     a. Check if the text includes at least one chemical compound (e.g., KBBF, BaB2O4, abbreviation, or pronoun).
     b. Verify if the text includes at least one nonlinear optical (nlo) materials property corresponding to a specific chemical compound, such as second harmonic generation coefficient (dij), band gaps (Eg), birefringence, absorption edge (cutoff edge), or LIDT.
     c. Confirm that the text contains at least one numerical value (e.g. 4.5 eV, 0.45 pm V-1) corresponding to a nonlinear optical (nlo) materials property.
-
     Sequentially examine each criterion. If any criterion is not met, return False for that criterion. Output a JSON complying with the schema:
 
     {
@@ -60,3 +67,22 @@ Case review. __nonlinear optical material key properties extraction.__
     "b": true/false,
     "c": true/false
     }
+
+#### _Model define_  
+this tool supported user created pydantic model by hard coding or by UI interacting.  
+below is screenshot of the UI.  
+![data_model](./images/build_model.png)  
+
+Some features help you to get an intuitive observation of your own model.  
+![node_tree](./images/node%20trees.png)  
+
+#### _extract_
+The former steps ensure that we have a solid preparation for extraction and now we are heading the the main point.  
+For CLI users, just typing
+```python
+python main.py
+```
+For UI userd, just click submit, and waiting.  
+Result is plainly jsonl file, so for illustration purpose, converted to csv to have a intuitive feeling. Note that this is the raw data, so no filtering is executed. For 100 papers extraction, the runnning time is around 8 min.
+![out_csv](./images/out_csv.png)
+
