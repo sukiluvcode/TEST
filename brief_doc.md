@@ -82,7 +82,7 @@ For CLI users, just typing
 ```python
 python main.py
 ```
-For UI userd, just click submit, and waiting.  
+For UI users, just click submit, and waiting.  
 Result is plainly jsonl file, so for illustration purpose, converted to csv to have a intuitive feeling. Note that this is the raw data, so no filtering is executed. For 100 papers extraction, the runnning time is around 8 min.
 ![out_csv](./images/out_csv.png)
 
